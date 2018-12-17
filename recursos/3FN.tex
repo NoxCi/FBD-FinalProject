@@ -1,0 +1,150 @@
+\documentclass[a4paper,twoside,11pt]{article}
+
+\usepackage[utf8]{inputenc}
+
+\setlength{\textwidth}{150mm}
+\setlength{\textheight}{230mm}
+\setlength{\oddsidemargin}{5mm}
+\setlength{\evensidemargin}{5mm}
+\setlength{\topmargin}{-10mm}
+
+\title{Dependencias funcionales}
+\author{Hiram Ehecatl Lujano Pastrana (313095409)}
+
+\begin{document}
+\maketitle
+
+\textbf{Geografico}:
+\begin{itemize}
+  \item Estado: Solo tenemos al id\_estado que determina al nombre\_estado
+        y abreviatura. Formalmente tenemos
+
+        Estado(id\_estado, nombre\_estado, abreviatura)\\
+        $F=\{id\_estado \rightarrow nombre\_estado~abreviatura\}$
+
+        Como id\_estado es llave y esta a la izquierda de la unica DF implica
+        que la relación esta en 3FN.
+
+  \item Municipio: Solo tiene a id\_estado e id\_municipio que determinan
+        al nombre\_municipio.
+        Formalmente
+
+        Municipio(id\_estado, id\_municipio, nombre\_municipio)\\
+        $F=\{id\_estado~id\_municipio\rightarrow nombre\_municipio\}$
+
+        (id\_estado~id\_municipio) es llave y esta es parte izquierda
+        de la unica DF por lo que la relación esta en 3FN.
+
+  \item Distrito\_local: id\_estado e id\_distrito\_local determinan al
+        nombre\_distrito\_local. Formalmente
+
+        Distrito\_local(id\_estado, id\_distrito\_local, nombre\_distrito\_local)\\
+        $F=\{id\_estado~id\_distrito\_local\rightarrow nombre\_distrito\_local\}$
+
+        (id\_estado~id\_distrito\_local) es llave y esta del lado izquierdo de
+        la unica DF por lo que la relación esta en 3FN.
+
+  \item Distrito\_federal: id\_estado e id\_distrito\_federal determinan al
+        nombre\_distrito\_federal. Formalmente
+
+        Distrito\_federal(id\_estado, id\_distrito\_federal, nombre\_distrito\_federal)\\
+        $F=\{id\_estado~id\_distrito\_federal\rightarrow nombre\_distrito\_federal\}$
+
+        (id\_estado~id\_distrito\_federal) es llave y esta del lado izquierdo de
+        la unica DF por lo que la relación esta en 3FN.
+
+  \item Seccion: No tiene DF no triviales
+
+\end{itemize}
+
+\textbf{Casillas}:
+\begin{itemize}
+  \item Casilla: id\_estado, id\_municipio, id\_distrito\_local, id\_distrito\_federal, seccion
+        e id\_casilla determinan a tipo\_casilla y aprobada. Formalmente
+
+        Casilla(id\_estado, id\_municipio, id\_distrito\_local, id\_distrito\_federal,
+         seccion, id\_casilla, tipo\_casilla, aprobada)\\
+        $F=\{id\_estado~id\_municipio~id\_distrito\_local~id\_distrito\_federal~seccion~id\_casilla\rightarrow\\
+        tipo\_casilla~aprobada\}$
+
+        (id\_estado~id\_municipio~id\_distrito\_local~id\_distrito\_federal~seccion~id\_casilla) es
+        llave y esta del lado izquierdo de la unica DF, por lo que la relación esta en 3FN.
+\end{itemize}
+
+\textbf{Partidos\_politicos}:
+\begin{itemize}
+  \item Partido: id\_distrito\_federal, id\_partido determinan el nombre\_partido y las siglas.
+        Formalmente
+
+        Partido(id\_distrito\_federal, id\_partido, nombre\_partido, siglas)\\
+        $F=\{id\_distrito\_federal~id\_partido\rightarrow nombre\_partido~siglas\}$
+
+        (id\_distrito\_federal~id\_partido) es llave y esta del lado izquierdo de la unica DF,
+        por lo que la relación esta en 3FN.
+\end{itemize}
+
+\textbf{Representantes}:
+\begin{itemize}
+  \item Representante\_preliminar: id\_distrito\_federal, id\_partido, id\_representante determinan
+        a nombre\_representante, fecha\_nac, sexo y fecha\_y\_hora\_registro. Formalmente
+
+        Representante\_preliminar(id\_distrito\_federal, id\_partido, id\_representante,
+        nombre\_representante, fecha\_nac, sexo fecha\_y\_hora\_registro)\\
+        $F=\{id\_distrito\_federal~id\_partido~id\_representante\rightarrow\\
+        nombre\_representante~fecha\_nac~sexo~echa\_y\_hora\_registro\}$
+
+        (id\_distrito\_federal~id\_partido~id\_representante) es llave y esta del lado izquierdo de la unica DF,
+        por lo que la relación esta en 3FN.
+
+  \item Representante\_aprobado: id\_estado, id\_distrito\_federal, id\_representante determinan
+        id\_partido\_que\_registro, fecha\_y\_hora\_aprobacion y usuario\_que\_aprobo. Formalmente
+
+        Representante\_aprobado(id\_estado, id\_distrito\_federal, id\_representante, id\_partido\_que\_registro
+        fecha\_y\_hora\_aprobacion, usuario\_que\_aprobo)\\
+        $F=\{id\_estado~id\_distrito\_federal~id\_representante\rightarrow\\
+        id\_partido\_que\_registro~fecha\_y\_hora\_aprobacion~usuario\_que\_aprobo\}$
+
+        (id\_estado~id\_distrito\_federal~id\_representante) es llave y esta del lado izquierdo de la unica DF,
+        por lo que la relación esta en 3FN.
+
+  \item Representante\_general: id\_estado, id\_distrito\_federal, id\_representante determinan
+        direccion\_representante\_g y clave\_elector. Formalmente
+
+        Representante\_general(id\_estado, id\_distrito\_federal, id\_representante,
+        direccion\_representante\_g, clave\_elector)\\
+        $F=\{id\_estado~id\_distrito\_federal~id\_representante\rightarrow\\
+        direccion\_representante\_g~clave\_elector\}$
+
+        (id\_estado~id\_distrito\_federal~id\_representante) es llave y esta del lado izquierdo de la unica DF,
+        por lo que la relación esta en 3FN.
+
+  \item Representante\_ante\_casilla: id\_estado, id\_distrito\_federal, id\_representante determinan
+        id\_casilla, direccion\_representante\_ac y tipo\_cargo. Formalmente
+
+        Representante\_ante\_casilla(id\_estado, id\_distrito\_federal, id\_representante,
+        id\_casilla, direccion\_representante\_ac, tipo\_cargo)\\
+        $F=\{id\_estado~id\_distrito\_federal~id\_representante\rightarrow\\
+        id\_casilla~direccion\_representante\_ac~tipo\_cargo\}$
+
+        (id\_estado~id\_distrito\_federal~id\_representante) es llave y esta del lado izquierdo de la unica DF,
+        por lo que la relación esta en 3FN.
+
+  \item Asistencia: id\_representante y fecha\_y\_hora determinan a id\_distrito\_federal, id\_estado,
+        tipo\_presencia, registro\_presencia. Formalmente
+
+        Asistencia(id\_representante, fecha\_y\_hora,id\_distrito\_federal, id\_estado, tipo\_presencia, registro\_presencia)\\
+        $F=\{id\_representante, fecha\_y\_hora \rightarrow \\
+        id\_distrito\_federal~id\_estado~tipo\_presencia, registro\_presencia\}$
+
+        (id\_representante, fecha\_y\_hora) es llave y esta del lado izquierdo de la unica DF,
+        por lo que la relación esta en 3FN.
+        
+  \item Domicilia\_representante\_ac: Aqui solo hay DF triviales.
+  \item Domicilia\_representante\_g: Aqui solo hay DF triviales.
+  \item Casilla\_que\_representa: Solo DF triviales.
+  \item log\_representantes\_aprobados: Sin DF.
+  \item Representantes\_sustituciones: Solo DF triviales.
+
+\end{itemize}
+
+\end{document}

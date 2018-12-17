@@ -1,0 +1,4 @@
+DROP SCHEMA Geografico CASCADE;
+DROP SCHEMA Casillas CASCADE;
+DROP SCHEMA Partidos_politicos CASCADE;
+DROP SCHEMA Representantes CASCADE;
